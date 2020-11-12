@@ -2,7 +2,7 @@ package KanjiDic;
 
 import java.util.ArrayList;
 
-public class Character {
+public class Kanji {
     private String literal = "";
     private Codepoints codepoints = new Codepoints();
     private Radical radicals = new Radical();

@@ -10,16 +10,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 //This is the header
-public class KanjiDic {
+public class Dictionary {
     private int fileVersion = -1;
     private String databaseVersion = "";
     private String dateOfCreation = "";
-    private ArrayList<Character> characters = new ArrayList<Character>();
+    private ArrayList<Kanji> kanji = new ArrayList<Kanji>();
 
-    public KanjiDic(String path)
+    public Dictionary(String path)
     {
         try {
             File fXmlFile = new File(path);
@@ -37,15 +36,14 @@ public class KanjiDic {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        characters.get(0);
     }
 
     private void fillThis(Document document)
     {
         Element header = (Element) document.getElementsByTagName("header").item(0);
-        fileVersion = Integer.parseInt(header.getElementsByTagName("file_version").item(0).getTextContent());
-        databaseVersion = header.getElementsByTagName("database_version").item(0).getTextContent();
-        dateOfCreation = header.getElementsByTagName("date_of_creation").item(0).getTextContent();
+        setFileVersion(Integer.parseInt(header.getElementsByTagName("file_version").item(0).getTextContent()));
+        setDatabaseVersion(header.getElementsByTagName("database_version").item(0).getTextContent());
+        setDateOfCreation(header.getElementsByTagName("date_of_creation").item(0).getTextContent());
     }
 
     private void fillChars(Document document)
@@ -54,24 +52,24 @@ public class KanjiDic {
         for(int i = 0; i<nodes.getLength(); i++)
         {
             Element echaracter = (Element)nodes.item(i);
-            Character character = new Character();
+            Kanji kanji = new Kanji();
 
             //Sets literal
-            character.setLiteral(echaracter.getElementsByTagName("literal").item(0).getTextContent());
+            kanji.setLiteral(echaracter.getElementsByTagName("literal").item(0).getTextContent());
 
             //Sets codepoints
             Codepoints codepoints = new Codepoints();
             NodeList cp_values = ((Element)(echaracter.getElementsByTagName("codepoint").item(0))).getElementsByTagName("cp_value");
             for(int k = 0; k< cp_values.getLength(); k++)
                 codepoints.getCpTypes().put(cp_values.item(k).getAttributes().getNamedItem("cp_type").getTextContent(), cp_values.item(k).getTextContent());
-            character.setCodepoints(codepoints);
+            kanji.setCodepoints(codepoints);
 
             //Sets radicals
             Radical radicals = new Radical();
             NodeList rads = ((Element)(echaracter.getElementsByTagName("radical").item(0))).getElementsByTagName("rad_value");
             for(int k = 0; k< rads.getLength(); k++)
                 radicals.getRadType().put(rads.item(k).getAttributes().getNamedItem("rad_type").getTextContent(), Integer.parseInt(rads.item(k).getTextContent()));
-            character.setRadicals(radicals);
+            kanji.setRadicals(radicals);
 
             //Sets misc
             Misc misc = new Misc();
@@ -101,7 +99,7 @@ public class KanjiDic {
             for(int k=0; k<radNames.getLength(); k++)
                 misc.getRadName().add(radNames.item(k).getTextContent());
 
-            character.setMisc(misc);
+            kanji.setMisc(misc);
 
             //Sets dick references
             if(echaracter.getElementsByTagName("dic_number").item(0)!=null) {
@@ -119,7 +117,7 @@ public class KanjiDic {
                     }
                     dictionaryRefs.getDictionaryReferences().put(builder.toString(), dicRef.item(k).getTextContent());
                 }
-                character.setDicReferences(dictionaryRefs);
+                kanji.setDicReferences(dictionaryRefs);
             }
 
             //Sets Query Code
@@ -136,7 +134,7 @@ public class KanjiDic {
                     }
                     queryCodes.getQueryCodes().put(sb.toString(), qCodes.item(k).getTextContent());
                 }
-                character.setQueryCodes(queryCodes);
+                kanji.setQueryCodes(queryCodes);
             }
 
             //Sets readingMeaning
@@ -181,20 +179,51 @@ public class KanjiDic {
                             break;
                     }
                 }
-                character.setReadingsMeanings(rms);
+                kanji.setReadingsMeanings(rms);
             }
 
             //Sets nanori
             if(echaracter.getElementsByTagName("reading_meaning").item(0)!=null) {
                 NodeList nanori = ((Element) (echaracter.getElementsByTagName("reading_meaning").item(0))).getElementsByTagName("nanori");
                 for (int k = 0; k < nanori.getLength(); k++) {
-                    character.getNanori().add(nanori.item(k).getTextContent());
+                    kanji.getNanori().add(nanori.item(k).getTextContent());
                 }
             }
-            characters.add(character);
+            getKanji().add(kanji);
 
         }
     }
 
 
+    public int getFileVersion() {
+        return fileVersion;
+    }
+
+    public void setFileVersion(int fileVersion) {
+        this.fileVersion = fileVersion;
+    }
+
+    public String getDatabaseVersion() {
+        return databaseVersion;
+    }
+
+    public void setDatabaseVersion(String databaseVersion) {
+        this.databaseVersion = databaseVersion;
+    }
+
+    public String getDateOfCreation() {
+        return dateOfCreation;
+    }
+
+    public void setDateOfCreation(String dateOfCreation) {
+        this.dateOfCreation = dateOfCreation;
+    }
+
+    public ArrayList<Kanji> getKanji() {
+        return kanji;
+    }
+
+    public void setKanji(ArrayList<Kanji> kanji) {
+        this.kanji = kanji;
+    }
 }

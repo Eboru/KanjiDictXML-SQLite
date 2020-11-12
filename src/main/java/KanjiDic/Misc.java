@@ -4,42 +4,42 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Misc {
-    private int grade = -1;
-    private int strokeCount = -1;
-    private int frequency = -1;
-    private int jlpt = -1;
+    private Integer grade = null;
+    private Integer strokeCount = null;
+    private Integer frequency = null;
+    private Integer jlpt = null;
     private HashMap<String, String> variant = new HashMap<String, String>();
     private ArrayList<String> radName = new ArrayList<String>();
 
-    public int getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(int grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 
-    public int getStrokeCount() {
+    public Integer getStrokeCount() {
         return strokeCount;
     }
 
-    public void setStrokeCount(int strokeCount) {
+    public void setStrokeCount(Integer strokeCount) {
         this.strokeCount = strokeCount;
     }
 
-    public int getFrequency() {
+    public Integer getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(int frequency) {
+    public void setFrequency(Integer frequency) {
         this.frequency = frequency;
     }
 
-    public int getJlpt() {
+    public Integer getJlpt() {
         return jlpt;
     }
 
-    public void setJlpt(int jlpt) {
+    public void setJlpt(Integer jlpt) {
         this.jlpt = jlpt;
     }
 
