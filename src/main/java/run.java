@@ -9,7 +9,7 @@ public class run {
     //Second argument->db path
     public static void main(String[] args) {
 
-        File file  = new File("C:\\Users\\garza\\OneDrive\\Escritorio\\Kanjidic2\\kanjidic2.db");
+        File file  = new File(args[1]);
         if(file.length() !=0)
         {
             System.err.println("FILE NOT EMPTY, HALTED!");
@@ -17,9 +17,9 @@ public class run {
         }
 
 
-        Dictionary dic = new Dictionary("C:\\Users\\garza\\OneDrive\\Escritorio\\Kanjidic2\\kanjidic2.xml");
+        Dictionary dic = new Dictionary(args[1]);
         DBGen dbGen = new DBGen();
-        dbGen.genFromKanjiDic(dic, DBGen.DBType.SQLite, "C:\\Users\\garza\\OneDrive\\Escritorio\\Kanjidic2\\kanjidic2.db", "");
+        dbGen.genFromKanjiDic(dic, DBGen.DBType.SQLite, args[2], "");
 
     }
 }
