@@ -1,4 +1,4 @@
-package KanjiDic;
+package com.KDE.KanjiDic;
 
 import java.util.ArrayList;
 import java.util.HashMap;

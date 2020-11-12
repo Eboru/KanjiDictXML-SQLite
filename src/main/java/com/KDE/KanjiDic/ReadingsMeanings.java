@@ -1,4 +1,4 @@
-package KanjiDic;
+package com.KDE.KanjiDic;
 
 public class ReadingsMeanings {
 

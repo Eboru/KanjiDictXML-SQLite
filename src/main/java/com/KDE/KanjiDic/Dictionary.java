@@ -1,4 +1,4 @@
-package KanjiDic;
+package com.KDE.KanjiDic;
 
 
 import org.w3c.dom.*;

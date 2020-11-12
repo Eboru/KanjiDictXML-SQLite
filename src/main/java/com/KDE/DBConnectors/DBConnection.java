@@ -1,4 +1,4 @@
-package DBConnectors;
+package com.KDE.DBConnectors;
 
 import java.sql.Connection;
 

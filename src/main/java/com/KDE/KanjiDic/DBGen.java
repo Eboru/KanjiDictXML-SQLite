@@ -1,8 +1,8 @@
-package KanjiDic;
+package com.KDE.KanjiDic;
 
-import DBConnectors.DBConnection;
-import DBConnectors.SQLiteConnection;
-import KanjiDic.Dictionary;
+import com.KDE.DBConnectors.DBConnection;
+import com.KDE.DBConnectors.SQLiteConnection;
+import com.KDE.KanjiDic.Dictionary;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -140,7 +140,7 @@ public class DBGen {
             String dbNanori = "INSERT INTO NANORI (literal, nanori) VALUES (?,?)";
             PreparedStatement nanoristm = connection.getConnection().prepareStatement(dbNanori);
 
-            for(KanjiDic.Kanji c : dictionary.getKanji())
+            for(com.KDE.KanjiDic.Kanji c : dictionary.getKanji())
             {
                 cpstm.setString(1, c.getLiteral());
                 cpstm.setString(2, c.getCodepoints().getCpTypes().get("ucs"));
